@@ -47,3 +47,4 @@ class BioASQDataset:
             pool = self.questions
 
         return random.sample(pool, n)
+        
