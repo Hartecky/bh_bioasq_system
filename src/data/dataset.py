@@ -31,7 +31,7 @@ class BioASQDataset:
 
     def filter_by_type(self, question_type):
         if question_type not in self.VALID_TYPES:
-            raise ValueError(f"Unknown type: '{question_type}'. Avalaible: {self.VALID_TYPES}")
+            raise ValueError(f"Unknown type: '{question_type}'. Available: {self.VALID_TYPES}")
     
         filtered_questions = []
         for q in self.questions:
