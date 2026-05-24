@@ -1,6 +1,8 @@
-from sentence_transformers import SentenceTransformer
 import faiss
+import pickle
 import numpy as np
+from pathlib import Path
+from sentence_transformers import SentenceTransformer
 
 class Retriever:
     def __init__(self):
@@ -33,3 +35,17 @@ class Retriever:
         query_embedding = self.model.encode([query], convert_to_numpy=True)
         scores, indices = self.index.search(query_embedding, k)
         return [self.snippets[i] for i in indices[0]]
+    
+    def save(self, directory):
+       Path(directory).mkdir(parents=True, exist_ok=True)
+       faiss.write_index(self.index, str(Path(directory) / "index.faiss"))
+       with open(Path(directory) / "snippets.pkl", "wb") as f:
+           pickle.dump(self.snippets, f)
+
+    def load(self, directory):
+        self.index = faiss.read_index(str(Path(directory) / "index.faiss"))
+
+        with open(Path(directory) / "snippets.pkl", "rb") as f:
+            self.snippets = pickle.load(f)
+
+
