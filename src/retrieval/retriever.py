@@ -10,6 +10,7 @@ class Retriever:
 
     def build(self, questions):
         texts = []
+
         for q in questions:
             for snippet in q.snippets:
                 self.snippets.append(snippet)
@@ -22,6 +23,13 @@ class Retriever:
             show_progress_bar=True,
             convert_to_numpy=True,
             )
+        
         dim = embeddings.shape[1]  # Number of columns = length of a vector
+
         self.index = faiss.IndexFlatIP(dim)
         self.index.add(embeddings)
+
+    def search(self, query, k = 5):
+        query_embedding = self.model.encode([query], convert_to_numpy=True)
+        scores, indices = self.index.search(query_embedding, k)
+        return [self.snippets[i] for i in indices[0]]
