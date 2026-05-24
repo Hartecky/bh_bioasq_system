@@ -24,3 +24,11 @@ class BioASQDataset:
 
         for record in data["questions"]:
             self.questions.append(Question(**record))
+
+    def filter_by_type(self, question_type):
+        filtered_questions = []
+        for q in self.questions:
+            if q.type == question_type:
+                filtered_questions.append(q)
+
+        return filtered_questions
