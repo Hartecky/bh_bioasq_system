@@ -12,3 +12,64 @@ class PromptBuilder():
         }
 
         return builders[question_type](question, context)
+    
+    def _yesno_prompt(self, question, context):
+        prompt = f"""
+        Based on the context below answer the question with ONLY 'yes' or 'no'
+        
+        Context:
+        {context}
+
+        Question:
+        {question}
+
+        Answer:
+        """
+
+        return prompt
+    
+    def _factoid_prompt(self, question, context):
+        prompt = f"""
+        Based on the context below answer the question providing a fact in a single short phrase or name
+        
+        Context:
+        {context}
+
+        Question:
+        {question}
+
+        Answer:
+        """
+
+        return prompt
+    
+    def _list_prompt(self, question, context):
+        prompt = f"""
+        Based on the context below answer the question providing as a comma separated list
+        
+        Context:
+        {context}
+
+        Question:
+        {question}
+
+        Answer:
+        """
+
+        return prompt
+    
+    def _summary_prompt(self, question, context):
+        prompt = f"""
+        Based on the context below answer the question providing a comprehensive summary
+        
+        Context:
+        {context}
+
+        Question:
+        {question}
+
+        Answer:
+        """
+
+        return prompt
+
