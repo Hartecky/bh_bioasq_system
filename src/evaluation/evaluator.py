@@ -80,20 +80,23 @@ class Evaluator:
         # Parse model answer
         pred_items = set(
             item.lower().strip()
-            for item in predicted.replace("\n", ",").split(",")
+            for item in predicted.replace("\n", ",").replace("* ", "").replace("- ", "").replace("• ", "").split(",")
             if item.strip()
         )
 
         # Parse golden standard
         if isinstance(expected, list):
-            gold_items = set(str(g).lower().strip() for g in expected)
-        else:
-            gold_items = {str(expected).lower().strip()}
+            gold_items = set()
+            for g in expected:
+                if isinstance(g, list):
+                    gold_items.update(str(i).lower().strip() for i in g)
+                else:
+                    gold_items.add(str(g).lower().strip())
 
-        if not pred_items or not gold_items:
-            return 0.0
-
-        tp = len(pred_items & gold_items)
+        tp = sum(
+                1 for gold in gold_items
+                if any(gold in pred or pred in gold for pred in pred_items)
+            )
         precision = tp / len(pred_items)
         recall = tp / len(gold_items)
 
