@@ -92,7 +92,12 @@ class Evaluator:
                     gold_items.update(str(i).lower().strip() for i in g)
                 else:
                     gold_items.add(str(g).lower().strip())
+        else:
+            gold_items = {str(expected).lower().strip()}
 
+        if not pred_items or not gold_items:
+            return 0.0
+        
         tp = sum(
                 1 for gold in gold_items
                 if any(gold in pred or pred in gold for pred in pred_items)
