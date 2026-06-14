@@ -54,7 +54,7 @@ class Evaluator:
         pred = predicted.lower().strip()
         gold = str(expected).lower().strip() if expected else ""
 
-        pred_word = pred.split()[0] if pred else ""
+        pred_word = pred.split()[0].rstrip('.') if pred else ""
         return pred_word == gold
 
     def _eval_factoid(self, predicted: str, expected) -> bool:
