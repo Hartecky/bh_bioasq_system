@@ -1,0 +1,10 @@
+{
+  "yesno_accuracy": 0.5454545454545454,
+  "yesno_total": 11,
+  "factoid_accuracy": 0.3333333333333333,
+  "factoid_total": 12,
+  "list_f1": 0.44236874236874235,
+  "list_total": 13,
+  "summary_rouge2": 0.30190803504851627,
+  "summary_total": 14
+}
