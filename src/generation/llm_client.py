@@ -1,6 +1,7 @@
 import requests
+from src.generation.base_client import BaseLLMClient
 
-class OllamaClient():
+class OllamaClient(BaseLLMClient):
     def __init__(self, model="mistral:7b-instruct-q4_0", host="http://localhost:11434"):
         self.host = host
         self.model = model
