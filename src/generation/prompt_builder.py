@@ -15,8 +15,8 @@ class PromptBuilder():
     
     def _yesno_prompt(self, question, context):
         prompt = f"""
-        Based on the context below answer the question with ONLY 'yes' or 'no'
-        
+        Based on the context below answer the question with ONLY 'yes' or 'no'.
+        Respond with a single word only: yes or no. No explanation.
         Context:
         {context}
 
@@ -30,8 +30,8 @@ class PromptBuilder():
     
     def _factoid_prompt(self, question, context):
         prompt = f"""
-        Based on the context below answer the question providing a fact in a single short phrase or name
-        
+        Based on the context below answer the question providing a fact in a single short phrase or name.
+        Respond with a short phrase or name only. No full sentences.
         Context:
         {context}
 
